@@ -1,0 +1,13 @@
+@startuml RPOS_state
+
+title RPOS_state
+
+state ACQUIRE
+
+state APPROACH
+
+state ORIENT
+
+state DOCK
+
+@enduml

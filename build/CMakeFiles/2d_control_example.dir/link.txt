@@ -1,0 +1,1 @@
+/usr/bin/c++ -static-libgcc -static-libstdc++ CMakeFiles/2d_control_example.dir/src/2d_control_example.cpp.o -o bin/2d_control_example 

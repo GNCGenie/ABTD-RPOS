@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/Inspecity/Codes/Vision/.venv/lib/python3.11/site-packages/cmake/data/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /home/Inspecity/Codes/Vision/.venv/lib/python3.11/site-packages/cmake/data/bin/cmake -E rm -f
+RM = /usr/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -67,7 +67,7 @@ include solver_code/CMakeFiles/uninstall.dir/compiler_depend.make
 include solver_code/CMakeFiles/uninstall.dir/progress.make
 
 solver_code/CMakeFiles/uninstall:
-	cd /home/Inspecity/Codes/RPOS_control/src/air_table_demo/MPC_Euler/c/build/solver_code && /home/Inspecity/Codes/Vision/.venv/lib/python3.11/site-packages/cmake/data/bin/cmake -P /home/Inspecity/Codes/RPOS_control/src/air_table_demo/MPC_Euler/c/build/solver_code/cmake_uninstall.cmake
+	cd /home/Inspecity/Codes/RPOS_control/src/air_table_demo/MPC_Euler/c/build/solver_code && /usr/bin/cmake -P /home/Inspecity/Codes/RPOS_control/src/air_table_demo/MPC_Euler/c/build/solver_code/cmake_uninstall.cmake
 
 uninstall: solver_code/CMakeFiles/uninstall
 uninstall: solver_code/CMakeFiles/uninstall.dir/build.make

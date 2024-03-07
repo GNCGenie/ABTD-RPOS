@@ -1,0 +1,15 @@
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/CMakeFiles/cpg_example.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/CMakeFiles/cpg.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/CMakeFiles/edit_cache.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/CMakeFiles/rebuild_cache.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/CMakeFiles/list_install_components.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/CMakeFiles/install.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/CMakeFiles/install/local.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/CMakeFiles/install/strip.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/solver_code/CMakeFiles/ecos.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/solver_code/CMakeFiles/edit_cache.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/solver_code/CMakeFiles/rebuild_cache.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/solver_code/CMakeFiles/list_install_components.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/solver_code/CMakeFiles/install.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/solver_code/CMakeFiles/install/local.dir
+/home/Inspecity/Codes/RPOS_control/src/air_table_demo/Thruster_Selection/c/build/solver_code/CMakeFiles/install/strip.dir

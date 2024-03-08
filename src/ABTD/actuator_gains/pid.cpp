@@ -21,14 +21,17 @@ public:
 
     // Calculate derivative term
     double derivative = (error - previous_error_) / dt;
+    if (derivative > derivative_limit_) {
+      derivative = derivative_limit_;
+    } else if (derivative < -derivative_limit_) {
+      derivative = -derivative_limit_;
+    }
 
     // Update previous error
     previous_error_ = error;
 
     // Calculate control output
-    double control_output = Kp * error + Ki * integral_ + Kd * derivative;
-
-    // Apply output saturation (optional)
+    double control_output = Kp_ * error + Ki_ * integral_ + Kd_ * derivative;
     if (control_output > output_limit_) {
       control_output = output_limit_;
     } else if (control_output < -output_limit_) {
@@ -50,24 +53,25 @@ private:
 
   // Optional limits for integral and output
   double integral_limit_ = 1.0;
-  double output_limit_ = 10.0;
+  double derivative_limit_ = 1.0;
+  double output_limit_ = 2.0;
 };
 
 int main() {
   // Sample usage
-  PIDController controller(1.0, 0.1, 0.5); // Adjust gains as needed
+  PIDController controller(0.1, 0.5, 0.3); // Adjust gains as needed
 
-  double current_value = 5.0;
+  double current_value = 0.0;
   double target_value = 10.0;
   double dt = 0.1;
 
-  for (int i = 0; i < 10; ++i) {
+  for (int i = 0; i < 10^2; ++i) {
     double control_output = controller.update(current_value, target_value, dt);
-    // Apply control output to your system
-    std::cout << "Control output: " << control_output << std::endl;
+    current_value += control_output*dt;
 
-    // Update current value (simulated system behavior)
-    current_value += 0.1; // Replace with actual system response
+    std::cout << "target_value: " << target_value << ", current_value: " << current_value << ", control_output: " << control_output << std::endl;
+
+    target_value += 2.0/(i+1);
   }
 
   return 0;

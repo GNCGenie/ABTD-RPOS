@@ -4,12 +4,11 @@ project(RPOS VERSION 1.0.0)
 # Output Generated build files to bin
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Find packages
-# Casadi
-#find_package(casadi REQUIRED)
-
 # Set Standard Libs to compiled into binary
 set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+
+# Include include directory
+include_directories(include)
 
 # Get all files in src directory
 file(GLOB SRC_FILES src/*.cpp)

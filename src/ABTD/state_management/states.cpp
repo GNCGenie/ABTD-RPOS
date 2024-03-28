@@ -5,18 +5,20 @@ using namespace tinyfsm;
 #include"telemetry.cpp"
 
 enum TeleCommand {
-    ACTIVE_MODE,
-    STR_TM_MODE,
-    FIRING_MODE
+    ACQUIRE_MODE,
+    APPROACH_MODE,
+    ORIENT_MODE,
+    DOCK_MODE
 };
 
 struct Clock : tinyfsm::Event{};
 struct Telecommand : tinyfsm::Event { int TC; };
 
 struct STANDBY;
-struct ACTIVE;
-struct FIRING;
-struct STR_TM;
+struct ACQUIRE;
+struct APPROACH;
+struct ORIENT;
+struct DOCK;
 
 struct Board : tinyfsm::Fsm<Board>
 {
@@ -32,90 +34,117 @@ struct STANDBY : Board
     void entry() override {
         // Initialise RT telemetry
         // Initialise telecommand handling
+        // Initialise controller
+        // Initialise Kalman Filters
     }
 
     void react(Clock const &) override {
-        // Generate Telemetry
-        printIdleTelemetry();
-    }
-
-    void react(Telecommand const & a) override {
-        if (a.TC == ACTIVE_MODE)
-            transit<ACTIVE>();
-    }
-};
-
-struct ACTIVE : Board
-{
-    void entry() override {
-        // Initialise RT telemetry
-        // Initialise FDIR
-        // Initialise PID / Maintainance functions
-    }
-
-    void react(Clock const &) override {
-        // Generate Telemetry
-        printActiveTelemetry();
-        // Run Fuel Tank PID
-        // Run FDIR & Catch any errors
-    }
-
-    void react(Telecommand const & a) override {
-        if (a.TC == FIRING_MODE)
-            transit<FIRING>();
-        if (a.TC == STR_TM_MODE)
-            transit<STR_TM>();
-    }
-};
-
-struct STR_TM : Board
-{
-    void entry() override {
-        // Initialise FDIR
-        // Initialise PID / Maintainance functions
-        // Initialise Operational Memory Read
-    }
-
-    void react(Clock const &) override {
-        // Transfer Stored Telemetry
-        printStoredTelemetry();
-        // Run Fuel Tank PID
-        // Run FDIR & Catch any errors
+        // Print state and internal variables
+        std::cout << "STANDBY" << std::endl;
     }
 
     void exit() override {
-        // Do Nothing
+        // Set velocity to zero
     }
 
     void react(Telecommand const & a) override {
-        if (a.TC == ACTIVE_MODE)
-            transit<ACTIVE>();
+        if (a.TC == ACQUIRE_MODE)
+            transit<ACQUIRE>();
     }
 };
 
-
-struct FIRING : Board
+struct ACQUIRE : Board
 {
     void entry() override {
-        // Initialise RT telemetry
-        // Initialise Hi-Freq Data Read/Write
-        // Initialise firing sequence
+        // Start rotation at constant velocity
+        // Start target acquisition
     }
 
     void react(Clock const &) override {
         // Generate Telemetry
-        printFiringTelemetry();
-        // Copy propulsion unit data to Volatile memory
-    }
-
-    void exit() override {
-        // Stop Hi-Freq Data Read/Write
-        // Copy Hi-Freq Data from Volatile to Non-volatile
+        std::cout << "ACQUIRE" << std::endl;
+        // Update detection state
     }
 
     void react(Telecommand const & a) override {
-        if (a.TC == ACTIVE_MODE)
-            transit<ACTIVE>();
+        if (a.TC == APPROACH_MODE)
+            transit<APPROACH>();
+    }
+};
+
+struct APPROACH : Board
+{
+    void entry() override {
+        // Initialise controller
+    }
+
+    void react(Clock const &) override {
+        // Calculate effort and activation times
+        std::cout << "APPROACH" << std::endl;
+    }
+
+    void exit() override {
+        // Set velocity to zero
+        transit<ORIENT>();
+    }
+
+    void react(Telecommand const & a) override {
+        if (a.TC == ACQUIRE_MODE)
+            transit<ACQUIRE>();
+        if (a.TC == ORIENT_MODE)
+            transit<ORIENT>();
+    }
+};
+
+struct ORIENT : Board
+{
+    void entry() override {
+        // Initialise trajectory
+        // ADCS online
+    }
+
+    void react(Clock const &) override {
+        // Circle the target till docking face is acquired
+        std::cout << "ORIENT" << std::endl;
+        // Keep target in frame center
+        // If target is lost, transition to ACQUIRE
+    }
+
+    void exit() override {
+        // Set velocity to zero
+        transit<DOCK>();
+    }
+
+    void react(Telecommand const & a) override {
+        if (a.TC == ACQUIRE_MODE)
+            transit<ACQUIRE>();
+        if (a.TC == DOCK_MODE)
+            transit<DOCK>();
+    }
+};
+
+struct DOCK : Board
+{
+    void entry() override {
+        // Set velocity to zero
+        // Open arm
+        // Generate trajectory
+    }
+
+    void react(Clock const &) override {
+        // Follow trajectory
+        std::cout << "DOCK" << std::endl;
+        // Keep target in frame center
+        // If target is lost, transition to ACQUIRE
+    }
+
+    void exit() override {
+        // Close arm
+    }
+
+    void react(Telecommand const & a) override {
+        if (a.TC == ACQUIRE_MODE)
+            transit<ACQUIRE>();
     }
 };
 

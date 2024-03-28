@@ -1,27 +1,18 @@
-"""
-
-Extended kalman filter (EKF) localization sample
-
-"""
-import sys
-import pathlib
-
-sys.path.append(str(pathlib.Path(__file__).parent.parent.parent))
-
 import math
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Covariance for EKF simulation
 Q = np.diag([
     0.1,  # variance of location on x-axis
     0.1,  # variance of location on y-axis
     1.0,  # variance of x-velocity
-    1.0  # variance of y-velocity
+    1.0   # variance of y-velocity
 ]) ** 2  # predict state covariance
+
 R = np.diag([1.0, 1.0]) ** 2  # Observation x,y position covariance
 
-#  Simulation parameter
+# Simulation parameter
 INPUT_NOISE = np.diag([1.0, 1.0]) ** 2
 GPS_NOISE = np.diag([0.5, 0.5]) ** 2
 
@@ -30,8 +21,11 @@ SIM_TIME = 1000.0  # simulation time [s]
 
 show_animation = True
 
-def calc_input():
-    return np.zeros(2)
+
+def calc_input(x, u):
+    #effort = np.array([[x[0][0]],[x[1][0]]])
+    return np.ones((2, 1))
+
 
 def observation(xTrue, xd, u):
     xTrue = motion_model(xTrue, u)
@@ -48,10 +42,10 @@ def observation(xTrue, xd, u):
 
 
 def motion_model(x, u):
-    A = np.array([[1.0, 0, 0, 0],
-                  [0, 1.0, 0, 0],
-                  [DT, 0, 0.0, 0],
-                  [0, DT, 0, 0]])
+    A = np.array([[1.0, 0, DT, 0],
+                  [0, 1.0, 0, DT],
+                  [0, 0, 0.0, 0],
+                  [0, 0, 0, 0]])
 
     B = np.array([
         [0, 0],
@@ -76,20 +70,6 @@ def observation_model(x):
 
 
 def jacob_f(x, u):
-    """
-    Jacobian of Motion Model
-
-    motion model
-    x_{t+1} = x_t+v*dt*cos(yaw)
-    y_{t+1} = y_t+v*dt*sin(yaw)
-    yaw_{t+1} = yaw_t+omega*dt
-    v_{t+1} = v{t}
-    so
-    dx/dyaw = -v*dt*sin(yaw)
-    dx/dv = dt*cos(yaw)
-    dy/dyaw = v*dt*cos(yaw)
-    dy/dv = dt*sin(yaw)
-    """
     jF = np.array([
         [1.0, 0.0, DT * x[2][0], 0],
         [0.0, 1.0, 0.0, DT * x[3][0]],
@@ -100,7 +80,6 @@ def jacob_f(x, u):
 
 
 def jacob_h():
-    # Jacobian of Observation Model
     jH = np.array([
         [1, 0, 0, 0],
         [0, 1, 0, 0]
@@ -110,12 +89,12 @@ def jacob_h():
 
 
 def ekf_estimation(xEst, PEst, z, u):
-    #  Predict
+    # Predict
     xPred = motion_model(xEst, u)
     jF = jacob_f(xEst, u)
     PPred = jF @ PEst @ jF.T + Q
 
-    #  Update
+    # Update
     jH = jacob_h()
     zPred = observation_model(xPred)
     y = z - zPred
@@ -133,6 +112,7 @@ def main():
     # State Vector [x y vx vy]'
     xEst = np.zeros((4, 1))
     xTrue = np.zeros((4, 1))
+    u = np.zeros((2, 1))
     PEst = np.eye(4)
 
     xDR = np.zeros((4, 1))  # Dead reckoning
@@ -145,7 +125,7 @@ def main():
 
     while SIM_TIME >= time:
         time += DT
-        u = calc_input()
+        u = calc_input(xTrue, u)
 
         xTrue, z, xDR, ud = observation(xTrue, xDR, u)
 
@@ -159,9 +139,6 @@ def main():
 
         if show_animation:
             plt.cla()
-            # for stopping simulation with the esc key.
-            plt.gcf().canvas.mpl_connect('key_release_event',
-                    lambda event: [exit(0) if event.key == 'escape' else None])
             plt.plot(hz[0, :], hz[1, :], ".g")
             plt.plot(hxTrue[0, :].flatten(),
                      hxTrue[1, :].flatten(), "-b")
@@ -172,6 +149,8 @@ def main():
             plt.axis("equal")
             plt.grid(True)
             plt.pause(0.0001)
+
+    plt.show()
 
 
 if __name__ == '__main__':

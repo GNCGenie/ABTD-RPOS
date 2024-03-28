@@ -16,28 +16,28 @@ int main()
     }
 
     Telecommand tc;
-    tc.TC = ACTIVE_MODE;
+    tc.TC = ACQUIRE_MODE;
     Board::dispatch(tc);
     for(int i = 0; i < 2; i++){
         Board::dispatch(clock);
         this_thread::sleep_for(chrono::milliseconds(500));
     }
 
-    tc.TC = FIRING_MODE;
+    tc.TC = APPROACH_MODE;
     Board::dispatch(tc);
     for(int i = 0; i < 2; i++){
         Board::dispatch(clock);
         this_thread::sleep_for(chrono::milliseconds(500));
     }
 
-    tc.TC = ACTIVE_MODE;
+    tc.TC = ORIENT_MODE;
     Board::dispatch(tc);
     for(int i = 0; i < 2; i++){
         Board::dispatch(clock);
         this_thread::sleep_for(chrono::milliseconds(500));
     }
 
-    tc.TC = STR_TM_MODE;
+    tc.TC = DOCK_MODE;
     Board::dispatch(tc);
     for(int i = 0; i < 2; i++){
         Board::dispatch(clock);

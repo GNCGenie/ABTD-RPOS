@@ -2,7 +2,7 @@
 
 ### Description:
 This function calculates the optimal impulses required to transition from an
-initial state to a target state while minimizing the fuel use and final state 
+initial state to a target state while minimizing the fuel use and final state
 deviation from target.
 
 ### Parameters:
@@ -39,3 +39,7 @@ print("Impulse 1: ", U1, "\nImpulse 2: ", U2, "\nTime 1: ", T1, "\nTime 2: ", T2
 
 Cython directory contains the cythonized version of CLOLOORBGA. Executing
 setup.py will build the C binary for controller
+
+```
+python setup.py build_ext --inplace
+```

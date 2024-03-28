@@ -64,7 +64,6 @@ CMAKE_BINARY_DIR = /home/Inspecity/Codes/RPOS_control/build
 
 # The main recursive "all" target.
 all: CMakeFiles/main.dir/all
-all: CMakeFiles/pid.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -73,7 +72,6 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/main.dir/clean
-clean: CMakeFiles/pid.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -101,32 +99,6 @@ main: CMakeFiles/main.dir/rule
 CMakeFiles/main.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/clean
 .PHONY : CMakeFiles/main.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/pid.dir
-
-# All Build rule for target.
-CMakeFiles/pid.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pid.dir/build.make CMakeFiles/pid.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pid.dir/build.make CMakeFiles/pid.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Inspecity/Codes/RPOS_control/build/CMakeFiles --progress-num=3,4 "Built target pid"
-.PHONY : CMakeFiles/pid.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/pid.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Inspecity/Codes/RPOS_control/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/pid.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Inspecity/Codes/RPOS_control/build/CMakeFiles 0
-.PHONY : CMakeFiles/pid.dir/rule
-
-# Convenience name for target.
-pid: CMakeFiles/pid.dir/rule
-.PHONY : pid
-
-# clean rule for target.
-CMakeFiles/pid.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pid.dir/build.make CMakeFiles/pid.dir/clean
-.PHONY : CMakeFiles/pid.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

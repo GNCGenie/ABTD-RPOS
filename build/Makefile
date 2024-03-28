@@ -129,19 +129,6 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-#=============================================================================
-# Target rules for targets named pid
-
-# Build rule for target.
-pid: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pid
-.PHONY : pid
-
-# fast build rule for target.
-pid/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pid.dir/build.make CMakeFiles/pid.dir/build
-.PHONY : pid/fast
-
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -166,30 +153,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/pid.o: src/pid.cpp.o
-.PHONY : src/pid.o
-
-# target to build an object file
-src/pid.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pid.dir/build.make CMakeFiles/pid.dir/src/pid.cpp.o
-.PHONY : src/pid.cpp.o
-
-src/pid.i: src/pid.cpp.i
-.PHONY : src/pid.i
-
-# target to preprocess a source file
-src/pid.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pid.dir/build.make CMakeFiles/pid.dir/src/pid.cpp.i
-.PHONY : src/pid.cpp.i
-
-src/pid.s: src/pid.cpp.s
-.PHONY : src/pid.s
-
-# target to generate assembly for a file
-src/pid.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pid.dir/build.make CMakeFiles/pid.dir/src/pid.cpp.s
-.PHONY : src/pid.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -199,13 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
-	@echo "... pid"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/pid.o"
-	@echo "... src/pid.i"
-	@echo "... src/pid.s"
 .PHONY : help
 
 

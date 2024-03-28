@@ -63,7 +63,7 @@ def calc_orb_tran(x, init, targ):
     X = X + dU(X) @ U1
     X = X + np.array(dT(X)) * T2
     X = X + dU(X) @ U2
-    return np.linalg.norm(X-targ) + 1e2*np.linalg.norm(x[0:6])
+    return np.linalg.norm((X-targ)[0:5]) + 1e2*np.linalg.norm(x[0:6])
 
 def get_impulse(init, targ):
     res = sp.optimize.minimize(calc_orb_tran, np.zeros(8), args=(init, targ))

@@ -52,31 +52,45 @@ def dU(x):
 
     return B
 
+def constraint(x):
+    return np.array([x[6],x[7]])
+
+def percent_error_OE(init,targ):
+    diff = init - targ
+    diff = np.abs(diff/[init[0], 1, 2*np.pi, 2*np.pi, 2*np.pi, 2*np.pi])
+    return diff
+
 def calc_orb_tran(x, init, targ):
     U1= x[0:3]
     U2= x[3:6]
-    T1 = x[-2]
-    T2 = x[-1]
+    T1 = x[6]
+    T2 = x[7]
     X = init
 
     X = X + np.array(dT(init)) * T1
     X = X + dU(X) @ U1
     X = X + np.array(dT(X)) * T2
     X = X + dU(X) @ U2
-    return np.linalg.norm((X-targ)[0:5]) + 1e2*np.linalg.norm(x[0:6])
+
+    weight = percent_error_OE(init,targ)
+    return np.linalg.norm(np.dot(weight, X - targ)) + 1e-2*np.linalg.norm(x[0:6])
+
 
 def get_impulse(init, targ):
-    res = sp.optimize.minimize(calc_orb_tran, np.zeros(8), args=(init, targ))
+    minimizer_kwargs = {"method": "BFGS", "args": (init, targ)}
+    res = sp.optimize.basinhopping(calc_orb_tran, np.zeros(8), niter=200, T=0.5,
+                                   minimizer_kwargs=minimizer_kwargs)
     return res
 
 if __name__ == "__main__":
-    init = [7.00e6, 1e-3, 1e-3, 0, 0, 0]
-    targ = [7.01e6, 1e-3, 1e-3, 0, 0, 0]
+    init = np.array([7.00e6, 1e-3, 1e-3, 0, 0, 0])
+    targ = np.array([7.00e6, 0e-3, 1e-3, 0, 0, 0])
+    print(percent_error_OE(init, targ))
     res = get_impulse(init, targ)
     print(res)
     x = res.x
     U1= x[0:3]
     U2= x[3:6]
-    T1 = x[-2]
-    T2 = x[-1]
+    T1 = x[6]
+    T2 = x[7]
     print("Impulse 1: ", U1, "\nImpulse 2: ", U2, "\nTime 1: ", T1, "\nTime 2: ", T2)

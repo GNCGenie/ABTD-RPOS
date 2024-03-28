@@ -70,4 +70,4 @@ def calc_orb_tran(np.ndarray[np.float64_t, ndim=1] x, np.ndarray[np.float64_t, n
 
 def get_impulse(init, targ):
     res = spopt.minimize(calc_orb_tran, np.zeros(8), args=(init, targ))
-    return res
+    return res.x

@@ -40,6 +40,6 @@ print("Impulse 1: ", U1, "\nImpulse 2: ", U2, "\nTime 1: ", T1, "\nTime 2: ", T2
 Cython directory contains the cythonized version of CLOLOORBGA. Executing
 setup.py will build the C binary for controller
 
-```
+```bash
 python setup.py build_ext --inplace
 ```

@@ -82,7 +82,7 @@ def calc_orb_tran(x, init, targ):
 def get_impulse(init, targ):
     minimizer_kwargs = {"method": "BFGS", "args": (init, targ)}
     res = sp.optimize.basinhopping(calc_orb_tran, np.array([27e3, .0, .0, .0, 27e3, .0, .0, .0]),
-                                   niter=10, T=1e0, minimizer_kwargs=minimizer_kwargs)
+                                   niter=10, T=1e-0, minimizer_kwargs=minimizer_kwargs)
     print(res)
 
     x = res.x
@@ -99,22 +99,3 @@ def get_impulse(init, targ):
     if normU < min_fire_time:
         U1 = 0.0
     return T1, U1, T2, U2
-
-if __name__ == "__main__":
-    init = np.array([7.00e6, 1e-3, 1e-3, 0, 0, np.random.uniform(0,2*np.pi)])
-    targ = np.array([7.01e6, 1e-3, -1e-3, 0, 0, np.random.uniform(0,2*np.pi)])
-
-    T1, U1, T2, U2 = get_impulse(init, targ)
-    print("Total impulse: ", np.linalg.norm(U1) + np.linalg.norm(U2))
-    print("Impulse 1: ", U1, "T1: ", T1)
-    print("Impulse 2: ", U2, "T2: ", T2)
-
-    X = init
-    X = X + np.array(dT(X)) * T1
-    X = X + dU(X) @ U1
-    X = X + np.array(dT(X)) * T2
-    X = X + dU(X) @ U2
-
-    weight = percent_error_OE(init,targ)
-    print("Initial deviations: ", np.dot(init-targ,weight))
-    print("Final deviations: ", np.dot(X-targ,weight))

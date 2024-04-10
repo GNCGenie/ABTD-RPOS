@@ -1,5 +1,6 @@
 import numpy as np
 import scipy as sp
+from copy import deepcopy
 
 R_EARTH     = 6.378136300e6           # [m] GGM05s Value
 GM_EARTH    = 3.986004415e14          # [m^3/s^2] GGM05s Value
@@ -57,40 +58,58 @@ def constraint(x):
 
 def percent_error_OE(init,targ):
     diff = init - targ
-    diff = np.abs(diff/[init[0], 1, 2*np.pi, 2*np.pi, 2*np.pi, 2*np.pi])
+    diff = np.abs(diff/[(init[0]+targ[0])/2, 1e-3, 2*np.pi, 2*np.pi, 2*np.pi, 2*np.pi])
+    diff[3:6] = 0
     return diff
 
 def calc_orb_tran(x, init, targ):
-    U1= x[0:3]
-    U2= x[3:6]
-    T1 = x[6]
-    T2 = x[7]
-    X = init
+    X = deepcopy(init)
 
-    X = X + np.array(dT(init)) * T1
+    T1 = x[0]
+    X = X + np.array(dT(X)) * T1
+    U1= x[1:4]
+    X = X + dU(X) @ U1
+
+    T2 = x[4]
+    X = X + np.array(dT(X)) * T2
+    U2= x[5:8]
+    X = X + dU(X) @ U2
+
+    weight = percent_error_OE(init,targ)
+    return np.linalg.norm(np.dot(weight, X - targ)) + \
+            np.linalg.norm(x[1:4]) + np.linalg.norm(x[5:8])
+
+def get_impulse(init, targ):
+    minimizer_kwargs = {"method": "COBYLA", "args": (init, targ)}
+    res = sp.optimize.basinhopping(calc_orb_tran, np.zeros(8), niter=100, T=1e-5,
+                                   minimizer_kwargs=minimizer_kwargs)
+    print(res)
+
+    x = res.x
+    T1 = x[0]
+    U1= x[1:4]
+    T2 = x[4]
+    U2= x[5:8]
+    return x
+
+if __name__ == "__main__":
+    init = np.array([7.00e6, 1e-3, 1e-3, 0, 0, np.random.uniform(0,2*np.pi)])
+    targ = np.array([7.01e6, 1e-3, -1e-3, 0, 0, np.random.uniform(0,2*np.pi)])
+    x = get_impulse(init, targ)
+
+    T1 = x[0]
+    U1= x[1:4]
+
+    T2 = x[4]
+    U2= x[5:8]
+    print("Total impulse: ", np.linalg.norm(U1) + np.linalg.norm(U2))
+
+    X = init
+    X = X + np.array(dT(X)) * T1
     X = X + dU(X) @ U1
     X = X + np.array(dT(X)) * T2
     X = X + dU(X) @ U2
 
     weight = percent_error_OE(init,targ)
-    return np.linalg.norm(np.dot(weight, X - targ)) + 1e-2*np.linalg.norm(x[0:6])
-
-
-def get_impulse(init, targ):
-    minimizer_kwargs = {"method": "BFGS", "args": (init, targ)}
-    res = sp.optimize.basinhopping(calc_orb_tran, np.zeros(8), niter=200, T=0.5,
-                                   minimizer_kwargs=minimizer_kwargs)
-    return res
-
-if __name__ == "__main__":
-    init = np.array([7.00e6, 1e-3, 1e-3, 0, 0, 0])
-    targ = np.array([7.00e6, 0e-3, 1e-3, 0, 0, 0])
-    print(percent_error_OE(init, targ))
-    res = get_impulse(init, targ)
-    print(res)
-    x = res.x
-    U1= x[0:3]
-    U2= x[3:6]
-    T1 = x[6]
-    T2 = x[7]
-    print("Impulse 1: ", U1, "\nImpulse 2: ", U2, "\nTime 1: ", T1, "\nTime 2: ", T2)
+    print("Initial deviations: ", np.dot(init-targ,weight))
+    print("Final deviations: ", np.dot(X-targ,weight))

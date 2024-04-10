@@ -8,6 +8,7 @@ deviation from target.
 ### Parameters:
 - `init`: Initial state vector represented as a list or array-like object.
 - `targ`: Target state vector represented as a list or array-like object.
+
 The state vectors are Orbital Elements : `[a, ecc, inc, raan, argp, nu]`
 
 ### Returns:
@@ -28,10 +29,11 @@ targ = [7.01e6, 1e-3, 1e-3, 0, 0, 0]
 res = get_impulse(init, targ)
 print(res)
 x = res.x
-U1= x[0:3]
-U2= x[3:6]
-T1 = x[-2]
-T2 = x[-1]
+T1 = x[0]
+U1= x[1:4]
+
+T2 = x[4]
+U2= x[5:8]
 print("Impulse 1: ", U1, "\nImpulse 2: ", U2, "\nTime 1: ", T1, "\nTime 2: ", T2)
 ```
 

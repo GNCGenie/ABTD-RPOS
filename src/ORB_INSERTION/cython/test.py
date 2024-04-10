@@ -1,13 +1,19 @@
-import get_impulse
+from get_impulse import dT, dU, percent_error_OE, get_impulse
 import numpy as np
 
 if __name__ == "__main__":
-    init = np.array([7.00e6, 1e-3, 1e-3, 0, 0, 0])
-    targ = np.array([7.01e6, 1e-3, 1e-3, 0, 0, 0])
-    res = get_impulse.get_impulse(init, targ)
-    x = res
-    U1= x[0:3]
-    U2= x[3:6]
-    T1 = x[-2]
-    T2 = x[-1]
-    print("Impulse 1: ", U1, "\nImpulse 2: ", U2, "\nTime 1: ", T1, "\nTime 2: ", T2)
+    init = np.array([7.00e6, 1e-3, 1e-3, 0, 0, np.random.uniform(0,2*np.pi)])
+    targ = np.array([7.01e6, 0e-3, -1e-3, 0, 0, np.random.uniform(0,2*np.pi)])
+    T1, U1, _, _ = get_impulse(init, targ)
+
+    print(T1, U1)
+
+    X = init
+    X = X + np.array(dT(X)) * T1
+    X = X + dU(X) @ U1
+#    X = X + np.array(dT(X)) * T2
+#    X = X + dU(X) @ U2
+
+    weight = percent_error_OE(init,targ)
+    print("Initial deviations: ", np.dot(init-targ,weight))
+    print("Final deviations: ", np.dot(X-targ,weight))

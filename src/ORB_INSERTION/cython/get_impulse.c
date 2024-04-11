@@ -2218,6 +2218,7 @@ static const char __pyx_k_GM_EARTH[] = "GM_EARTH";
 static const char __pyx_k_J2_EARTH[] = "J2_EARTH";
 static const char __pyx_k_deepcopy[] = "deepcopy";
 static const char __pyx_k_optimize[] = "optimize";
+static const char __pyx_k_sat_mass[] = "sat_mass";
 static const char __pyx_k_constraint[] = "constraint";
 static const char __pyx_k_OMEGA_EARTH[] = "OMEGA_EARTH";
 static const char __pyx_k_get_impulse[] = "get_impulse";
@@ -2230,8 +2231,10 @@ static const char __pyx_k_min_fire_time[] = "min_fire_time";
 static const char __pyx_k_get_impulse_pyx[] = "get_impulse.pyx";
 static const char __pyx_k_minimizer_kwargs[] = "minimizer_kwargs";
 static const char __pyx_k_percent_error_OE[] = "percent_error_OE";
+static const char __pyx_k_thruster_strength[] = "thruster_strength";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_weight_thruster_ratio[] = "weight_thruster_ratio";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_11get_impulse_dT(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
 static PyObject *__pyx_pf_11get_impulse_2dU(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
@@ -2337,6 +2340,7 @@ typedef struct {
   PyObject *__pyx_n_s_r;
   PyObject *__pyx_n_s_res;
   PyObject *__pyx_n_s_rmatmul;
+  PyObject *__pyx_n_s_sat_mass;
   PyObject *__pyx_n_s_scipy;
   PyObject *__pyx_n_s_sin;
   PyObject *__pyx_n_s_sp;
@@ -2345,8 +2349,10 @@ typedef struct {
   PyObject *__pyx_n_s_targ;
   PyObject *__pyx_n_s_test;
   PyObject *__pyx_n_s_theta;
+  PyObject *__pyx_n_s_thruster_strength;
   PyObject *__pyx_n_s_val;
   PyObject *__pyx_n_s_weight;
+  PyObject *__pyx_n_s_weight_thruster_ratio;
   PyObject *__pyx_n_s_x;
   PyObject *__pyx_float__0;
   PyObject *__pyx_float_0_0;
@@ -2492,6 +2498,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_r);
   Py_CLEAR(clear_module_state->__pyx_n_s_res);
   Py_CLEAR(clear_module_state->__pyx_n_s_rmatmul);
+  Py_CLEAR(clear_module_state->__pyx_n_s_sat_mass);
   Py_CLEAR(clear_module_state->__pyx_n_s_scipy);
   Py_CLEAR(clear_module_state->__pyx_n_s_sin);
   Py_CLEAR(clear_module_state->__pyx_n_s_sp);
@@ -2500,8 +2507,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_targ);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_theta);
+  Py_CLEAR(clear_module_state->__pyx_n_s_thruster_strength);
   Py_CLEAR(clear_module_state->__pyx_n_s_val);
   Py_CLEAR(clear_module_state->__pyx_n_s_weight);
+  Py_CLEAR(clear_module_state->__pyx_n_s_weight_thruster_ratio);
   Py_CLEAR(clear_module_state->__pyx_n_s_x);
   Py_CLEAR(clear_module_state->__pyx_float__0);
   Py_CLEAR(clear_module_state->__pyx_float_0_0);
@@ -2625,6 +2634,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_r);
   Py_VISIT(traverse_module_state->__pyx_n_s_res);
   Py_VISIT(traverse_module_state->__pyx_n_s_rmatmul);
+  Py_VISIT(traverse_module_state->__pyx_n_s_sat_mass);
   Py_VISIT(traverse_module_state->__pyx_n_s_scipy);
   Py_VISIT(traverse_module_state->__pyx_n_s_sin);
   Py_VISIT(traverse_module_state->__pyx_n_s_sp);
@@ -2633,8 +2643,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_targ);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_theta);
+  Py_VISIT(traverse_module_state->__pyx_n_s_thruster_strength);
   Py_VISIT(traverse_module_state->__pyx_n_s_val);
   Py_VISIT(traverse_module_state->__pyx_n_s_weight);
+  Py_VISIT(traverse_module_state->__pyx_n_s_weight_thruster_ratio);
   Py_VISIT(traverse_module_state->__pyx_n_s_x);
   Py_VISIT(traverse_module_state->__pyx_float__0);
   Py_VISIT(traverse_module_state->__pyx_float_0_0);
@@ -2768,6 +2780,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_r __pyx_mstate_global->__pyx_n_s_r
 #define __pyx_n_s_res __pyx_mstate_global->__pyx_n_s_res
 #define __pyx_n_s_rmatmul __pyx_mstate_global->__pyx_n_s_rmatmul
+#define __pyx_n_s_sat_mass __pyx_mstate_global->__pyx_n_s_sat_mass
 #define __pyx_n_s_scipy __pyx_mstate_global->__pyx_n_s_scipy
 #define __pyx_n_s_sin __pyx_mstate_global->__pyx_n_s_sin
 #define __pyx_n_s_sp __pyx_mstate_global->__pyx_n_s_sp
@@ -2776,8 +2789,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_targ __pyx_mstate_global->__pyx_n_s_targ
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 #define __pyx_n_s_theta __pyx_mstate_global->__pyx_n_s_theta
+#define __pyx_n_s_thruster_strength __pyx_mstate_global->__pyx_n_s_thruster_strength
 #define __pyx_n_s_val __pyx_mstate_global->__pyx_n_s_val
 #define __pyx_n_s_weight __pyx_mstate_global->__pyx_n_s_weight
+#define __pyx_n_s_weight_thruster_ratio __pyx_mstate_global->__pyx_n_s_weight_thruster_ratio
 #define __pyx_n_s_x __pyx_mstate_global->__pyx_n_s_x
 #define __pyx_float__0 __pyx_mstate_global->__pyx_float__0
 #define __pyx_float_0_0 __pyx_mstate_global->__pyx_float_0_0
@@ -5968,6 +5983,9 @@ static PyObject *__pyx_pf_11get_impulse_10get_impulse(CYTHON_UNUSED PyObject *__
   PyObject *__pyx_v_U1 = NULL;
   PyObject *__pyx_v_T2 = NULL;
   PyObject *__pyx_v_U2 = NULL;
+  double __pyx_v_sat_mass;
+  double __pyx_v_thruster_strength;
+  double __pyx_v_weight_thruster_ratio;
   double __pyx_v_max_fire_time;
   double __pyx_v_min_fire_time;
   PyObject *__pyx_v_normU = NULL;
@@ -6181,7 +6199,7 @@ static PyObject *__pyx_pf_11get_impulse_10get_impulse(CYTHON_UNUSED PyObject *__
  *     T2 = x[4]
  *     U2= x[5:8]             # <<<<<<<<<<<<<<
  * 
- *     max_fire_time = 10.0 # [s]
+ *     sat_mass = 100.0 # [kg]
  */
   __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_x, 5, 8, NULL, NULL, &__pyx_slice__3, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -6191,13 +6209,74 @@ static PyObject *__pyx_pf_11get_impulse_10get_impulse(CYTHON_UNUSED PyObject *__
   /* "get_impulse.pyx":94
  *     U2= x[5:8]
  * 
+ *     sat_mass = 100.0 # [kg]             # <<<<<<<<<<<<<<
+ *     thruster_strength = 10.0 # [N]
+ *     weight_thruster_ratio = sat_mass / thruster_strength
+ */
+  __pyx_v_sat_mass = 100.0;
+
+  /* "get_impulse.pyx":95
+ * 
+ *     sat_mass = 100.0 # [kg]
+ *     thruster_strength = 10.0 # [N]             # <<<<<<<<<<<<<<
+ *     weight_thruster_ratio = sat_mass / thruster_strength
+ *     U1 = U1 * weight_thruster_ratio
+ */
+  __pyx_v_thruster_strength = 10.0;
+
+  /* "get_impulse.pyx":96
+ *     sat_mass = 100.0 # [kg]
+ *     thruster_strength = 10.0 # [N]
+ *     weight_thruster_ratio = sat_mass / thruster_strength             # <<<<<<<<<<<<<<
+ *     U1 = U1 * weight_thruster_ratio
+ *     U2 = U2 * weight_thruster_ratio
+ */
+  if (unlikely(__pyx_v_thruster_strength == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(0, 96, __pyx_L1_error)
+  }
+  __pyx_v_weight_thruster_ratio = (__pyx_v_sat_mass / __pyx_v_thruster_strength);
+
+  /* "get_impulse.pyx":97
+ *     thruster_strength = 10.0 # [N]
+ *     weight_thruster_ratio = sat_mass / thruster_strength
+ *     U1 = U1 * weight_thruster_ratio             # <<<<<<<<<<<<<<
+ *     U2 = U2 * weight_thruster_ratio
+ * 
+ */
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_weight_thruster_ratio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyNumber_Multiply(__pyx_v_U1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(__pyx_v_U1, __pyx_t_3);
+  __pyx_t_3 = 0;
+
+  /* "get_impulse.pyx":98
+ *     weight_thruster_ratio = sat_mass / thruster_strength
+ *     U1 = U1 * weight_thruster_ratio
+ *     U2 = U2 * weight_thruster_ratio             # <<<<<<<<<<<<<<
+ * 
+ *     max_fire_time = 10.0 # [s]
+ */
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_weight_thruster_ratio); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyNumber_Multiply(__pyx_v_U2, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF_SET(__pyx_v_U2, __pyx_t_2);
+  __pyx_t_2 = 0;
+
+  /* "get_impulse.pyx":100
+ *     U2 = U2 * weight_thruster_ratio
+ * 
  *     max_fire_time = 10.0 # [s]             # <<<<<<<<<<<<<<
  *     min_fire_time = 0.10 # [s]
  *     normU = np.linalg.norm(U1)
  */
   __pyx_v_max_fire_time = 10.0;
 
-  /* "get_impulse.pyx":95
+  /* "get_impulse.pyx":101
  * 
  *     max_fire_time = 10.0 # [s]
  *     min_fire_time = 0.10 # [s]             # <<<<<<<<<<<<<<
@@ -6206,19 +6285,19 @@ static PyObject *__pyx_pf_11get_impulse_10get_impulse(CYTHON_UNUSED PyObject *__
  */
   __pyx_v_min_fire_time = 0.10;
 
-  /* "get_impulse.pyx":96
+  /* "get_impulse.pyx":102
  *     max_fire_time = 10.0 # [s]
  *     min_fire_time = 0.10 # [s]
  *     normU = np.linalg.norm(U1)             # <<<<<<<<<<<<<<
  *     if normU > max_fire_time:
  *         U1 = U1 / normU * max_fire_time
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_linalg); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_linalg); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_norm); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_norm); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -6239,47 +6318,47 @@ static PyObject *__pyx_pf_11get_impulse_10get_impulse(CYTHON_UNUSED PyObject *__
     PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_v_U1};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 96, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_normU = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "get_impulse.pyx":97
+  /* "get_impulse.pyx":103
  *     min_fire_time = 0.10 # [s]
  *     normU = np.linalg.norm(U1)
  *     if normU > max_fire_time:             # <<<<<<<<<<<<<<
  *         U1 = U1 / normU * max_fire_time
  *     if normU < min_fire_time:
  */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_max_fire_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_max_fire_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_v_normU, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_normU, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_8) {
 
-    /* "get_impulse.pyx":98
+    /* "get_impulse.pyx":104
  *     normU = np.linalg.norm(U1)
  *     if normU > max_fire_time:
  *         U1 = U1 / normU * max_fire_time             # <<<<<<<<<<<<<<
  *     if normU < min_fire_time:
  *         U1 = 0.0
  */
-    __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_v_U1, __pyx_v_normU); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_v_U1, __pyx_v_normU); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_max_fire_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_max_fire_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = PyNumber_Multiply(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Multiply(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF_SET(__pyx_v_U1, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "get_impulse.pyx":97
+    /* "get_impulse.pyx":103
  *     min_fire_time = 0.10 # [s]
  *     normU = np.linalg.norm(U1)
  *     if normU > max_fire_time:             # <<<<<<<<<<<<<<
@@ -6288,59 +6367,60 @@ static PyObject *__pyx_pf_11get_impulse_10get_impulse(CYTHON_UNUSED PyObject *__
  */
   }
 
-  /* "get_impulse.pyx":99
+  /* "get_impulse.pyx":105
  *     if normU > max_fire_time:
  *         U1 = U1 / normU * max_fire_time
  *     if normU < min_fire_time:             # <<<<<<<<<<<<<<
  *         U1 = 0.0
- *     return T1, U1, T2, U2
+ * 
  */
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_min_fire_time); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_min_fire_time); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_normU, __pyx_t_5, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_normU, __pyx_t_5, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_8) {
 
-    /* "get_impulse.pyx":100
+    /* "get_impulse.pyx":106
  *         U1 = U1 / normU * max_fire_time
  *     if normU < min_fire_time:
  *         U1 = 0.0             # <<<<<<<<<<<<<<
+ * 
  *     return T1, U1, T2, U2
  */
     __Pyx_INCREF(__pyx_float_0_0);
     __Pyx_DECREF_SET(__pyx_v_U1, __pyx_float_0_0);
 
-    /* "get_impulse.pyx":99
+    /* "get_impulse.pyx":105
  *     if normU > max_fire_time:
  *         U1 = U1 / normU * max_fire_time
  *     if normU < min_fire_time:             # <<<<<<<<<<<<<<
  *         U1 = 0.0
- *     return T1, U1, T2, U2
+ * 
  */
   }
 
-  /* "get_impulse.pyx":101
- *     if normU < min_fire_time:
+  /* "get_impulse.pyx":108
  *         U1 = 0.0
+ * 
  *     return T1, U1, T2, U2             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyTuple_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_T1);
   __Pyx_GIVEREF(__pyx_v_T1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_T1)) __PYX_ERR(0, 101, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_T1)) __PYX_ERR(0, 108, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_U1);
   __Pyx_GIVEREF(__pyx_v_U1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_U1)) __PYX_ERR(0, 101, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_U1)) __PYX_ERR(0, 108, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_T2);
   __Pyx_GIVEREF(__pyx_v_T2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_v_T2)) __PYX_ERR(0, 101, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_v_T2)) __PYX_ERR(0, 108, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_U2);
   __Pyx_GIVEREF(__pyx_v_U2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 3, __pyx_v_U2)) __PYX_ERR(0, 101, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 3, __pyx_v_U2)) __PYX_ERR(0, 108, __pyx_L1_error);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
@@ -6462,6 +6542,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_r, __pyx_k_r, sizeof(__pyx_k_r), 0, 0, 1, 1},
     {&__pyx_n_s_res, __pyx_k_res, sizeof(__pyx_k_res), 0, 0, 1, 1},
     {&__pyx_n_s_rmatmul, __pyx_k_rmatmul, sizeof(__pyx_k_rmatmul), 0, 0, 1, 1},
+    {&__pyx_n_s_sat_mass, __pyx_k_sat_mass, sizeof(__pyx_k_sat_mass), 0, 0, 1, 1},
     {&__pyx_n_s_scipy, __pyx_k_scipy, sizeof(__pyx_k_scipy), 0, 0, 1, 1},
     {&__pyx_n_s_sin, __pyx_k_sin, sizeof(__pyx_k_sin), 0, 0, 1, 1},
     {&__pyx_n_s_sp, __pyx_k_sp, sizeof(__pyx_k_sp), 0, 0, 1, 1},
@@ -6470,8 +6551,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_targ, __pyx_k_targ, sizeof(__pyx_k_targ), 0, 0, 1, 1},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
     {&__pyx_n_s_theta, __pyx_k_theta, sizeof(__pyx_k_theta), 0, 0, 1, 1},
+    {&__pyx_n_s_thruster_strength, __pyx_k_thruster_strength, sizeof(__pyx_k_thruster_strength), 0, 0, 1, 1},
     {&__pyx_n_s_val, __pyx_k_val, sizeof(__pyx_k_val), 0, 0, 1, 1},
     {&__pyx_n_s_weight, __pyx_k_weight, sizeof(__pyx_k_weight), 0, 0, 1, 1},
+    {&__pyx_n_s_weight_thruster_ratio, __pyx_k_weight_thruster_ratio, sizeof(__pyx_k_weight_thruster_ratio), 0, 0, 1, 1},
     {&__pyx_n_s_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
     {0, 0, 0, 0, 0, 0, 0}
   };
@@ -6590,10 +6673,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     minimizer_kwargs = {"method": "BFGS", "args": (init, targ)}
  *     res = sp.optimize.basinhopping(calc_orb_tran, np.array([27e3, .0, .0, .0, 27e3, .0, .0, .0]),
  */
-  __pyx_tuple__16 = PyTuple_Pack(12, __pyx_n_s_init, __pyx_n_s_targ, __pyx_n_s_minimizer_kwargs, __pyx_n_s_res, __pyx_n_s_x, __pyx_n_s_T1, __pyx_n_s_U1, __pyx_n_s_T2, __pyx_n_s_U2, __pyx_n_s_max_fire_time, __pyx_n_s_min_fire_time, __pyx_n_s_normU); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(15, __pyx_n_s_init, __pyx_n_s_targ, __pyx_n_s_minimizer_kwargs, __pyx_n_s_res, __pyx_n_s_x, __pyx_n_s_T1, __pyx_n_s_U1, __pyx_n_s_T2, __pyx_n_s_U2, __pyx_n_s_sat_mass, __pyx_n_s_thruster_strength, __pyx_n_s_weight_thruster_ratio, __pyx_n_s_max_fire_time, __pyx_n_s_min_fire_time, __pyx_n_s_normU); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_get_impulse_pyx, __pyx_n_s_get_impulse, 82, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_get_impulse_pyx, __pyx_n_s_get_impulse, 82, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;

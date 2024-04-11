@@ -91,6 +91,12 @@ def get_impulse(init, targ):
     T2 = x[4]
     U2= x[5:8]
 
+    sat_mass = 100.0 # [kg]
+    thruster_strength = 10.0 # [N]
+    weight_thruster_ratio = sat_mass / thruster_strength
+    U1 = U1 * weight_thruster_ratio
+    U2 = U2 * weight_thruster_ratio
+
     max_fire_time = 10.0 # [s]
     min_fire_time = 0.10 # [s]
     normU = np.linalg.norm(U1)
@@ -98,4 +104,5 @@ def get_impulse(init, targ):
         U1 = U1 / normU * max_fire_time
     if normU < min_fire_time:
         U1 = 0.0
+
     return T1, U1, T2, U2
